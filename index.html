@@ -1,10 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube India — DPDP Consent & Privacy Prototype</title>
+<meta name="description" content="Step-by-step interactive prototype showing YouTube India's DPDP consent flow, privacy center, and data rights management on Android.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="Styling.css">
 </head>
 <body>
 
+<!-- ====== HEADER ====== -->
+<header class="proto-header">
+  <div class="header-badge">INTERACTIVE PROTOTYPE</div>
+  <h1 class="header-title">YouTube India — Consent & Privacy Center</h1>
+  <p class="header-sub">A step-by-step user journey through DPDP Act compliance.<br>Click through each screen inside the phone to experience the flow.</p>
+</header>
+
+<!-- ====== STEP INDICATOR ====== -->
+<nav class="step-nav" id="stepNav">
+  <button class="step-pill active" data-target="consent" onclick="go('consent')">
+    <span class="pill-num">1</span> Consent
+  </button>
+  <span class="step-connector"></span>
+  <button class="step-pill" data-target="home" onclick="go('home'); toast();">
+    <span class="pill-num">2</span> Home Feed
+  </button>
+  <span class="step-connector"></span>
+  <button class="step-pill" data-target="privacy" onclick="go('privacy')">
+    <span class="pill-num">3</span> Privacy Center
+  </button>
+  <span class="step-connector"></span>
+  <button class="step-pill" data-target="rights" onclick="requestRight('View my data','You will get an in-app summary of every data category YouTube holds about you, grouped by purpose.')">
+    <span class="pill-num">4</span> Data Rights
+  </button>
+</nav>
+
+<!-- ====== MAIN STAGE ====== -->
+<main class="stage">
+
+  <!-- LEFT ANNOTATIONS -->
+  <aside class="annotations left-annotations">
+    <div class="anno-card anno-s1 visible" data-screen="consent">
+      <div class="anno-step">Step 1</div>
+      <h3 class="anno-title">First-Run Consent</h3>
+      <p class="anno-desc">On first launch, the user sees a clear, itemised consent screen. Each data purpose has its own toggle — nothing is bundled. The user chooses exactly what they're comfortable sharing.</p>
+      <ul class="anno-details">
+        <li>Individual toggles per purpose</li>
+        <li>"Why we ask" explainer for each</li>
+        <li>Pre-checked only where necessary</li>
+        <li>YouTube works even if all are off</li>
+      </ul>
+    </div>
+    <div class="anno-card anno-s3" data-screen="privacy">
+      <div class="anno-step">Step 3</div>
+      <h3 class="anno-title">Privacy Center</h3>
+      <p class="anno-desc">The user taps their profile avatar to access the Privacy Center. All consent choices are visible at a glance with their current status (On/Off), and data rights actions are one tap away.</p>
+      <ul class="anno-details">
+        <li>Consent status per category</li>
+        <li>Self-serve data rights section</li>
+        <li>View, correct, download, or erase data</li>
+        <li>No support tickets needed</li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- PHONE MOCKUP -->
+  <div class="phone-wrapper">
+    <div class="phone-frame">
+      <div class="phone-notch">
+        <div class="notch-camera"></div>
+      </div>
+
+      <!-- SCREEN 1: First-run itemised consent -->
+      <div class="screen active" id="consent">
+        <div class="statusbar">
+          <span class="sb-time">4:53 PM</span>
+          <div class="sb-icons">
+            <span class="sb-signal">📶</span>
+            <span class="sb-battery">🔋</span>
+          </div>
+        </div>
+        <div class="scroll">
+          <div class="consent-head">
+            <div class="brand">You<span>Tube</span></div>
+            <div class="consent-title">Before you start, choose what you're comfortable sharing</div>
+            <div class="consent-sub">Each choice controls one thing. You can change any of these anytime in Privacy Center — and YouTube still works if you turn everything off.</div>
+          </div>
+
+          <div class="toggle-card">
+            <div class="toggle-icon">▶</div>
+            <div class="toggle-body">
+              <h4>Watch &amp; search history</h4>
+              <p>Used to personalise your recommendations and "Up next" queue.</p>
+              <div class="why-link" onclick="alert('Why we ask: without this, your Home feed shows general trending videos instead of ones matched to your interests. Nothing is shared with advertisers from this toggle alone.')">Why we ask</div>
+            </div>
+            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          </div>
+
+          <div class="toggle-card">
+            <div class="toggle-icon">🎯</div>
+            <div class="toggle-body">
+              <h4>Ad personalisation</h4>
+              <p>Uses your activity to show more relevant ads, instead of random ones.</p>
+              <div class="why-link" onclick="alert('Why we ask: turning this off means you still see ads, just not tailored to your activity. Your free access to YouTube is unaffected either way.')">Why we ask</div>
+            </div>
+            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+          </div>
+
+          <div class="toggle-card">
+            <div class="toggle-icon">📍</div>
+            <div class="toggle-body">
+              <h4>Location</h4>
+              <p>Shows local news, events and creators near you.</p>
+              <div class="why-link" onclick="alert('Why we ask: without this, local content is based on your device language and network region only, which is less precise.')">Why we ask</div>
+            </div>
+            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+          </div>
+
+          <div class="toggle-card">
+            <div class="toggle-icon">🎙</div>
+            <div class="toggle-body">
+              <h4>Voice &amp; comments</h4>
+              <p>Improves voice search accuracy and comment spam filtering.</p>
+              <div class="why-link" onclick="alert('Why we ask: this only improves how well voice search understands you and how well we catch spam in comments you post.')">Why we ask</div>
+            </div>
+            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          </div>
+        </div>
+
+        <div class="consent-footer">
+          <div class="fineprint">By continuing you agree to our <a href="#">Privacy Notice</a>. You can withdraw any consent as easily as you gave it, anytime, in Privacy Center.</div>
+          <button class="btn-primary" id="btn-confirm" onclick="go('home'); toast();">Confirm my choices</button>
+        </div>
+      </div>
+
+      <!-- SCREEN 2: Home feed -->
+      <div class="screen" id="home">
+        <div class="statusbar">
+          <span class="sb-time">4:53 PM</span>
+          <div class="sb-icons">
+            <span class="sb-signal">📶</span>
+            <span class="sb-battery">🔋</span>
+          </div>
+        </div>
+        <div class="topbar">
+          <div class="brand">You<span>Tube</span></div>
+          <div class="avatar" id="avatar-btn" onclick="go('privacy')">P</div>
+        </div>
+        <div class="scroll">
+          <div class="toast" id="toastMsg" style="display:none;">Your choices are saved. You're in control — manage them anytime in Privacy Center.</div>
+
+          <div class="video-card">
+            <div class="thumb">14:02 · tutorial</div>
+            <div class="video-meta">
+              <div class="avatar">DS</div>
+              <div>
+                <div class="video-title">Build a budget spreadsheet in 10 minutes</div>
+                <div class="video-sub">DataSense · 240K views · 2 days ago</div>
+              </div>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="thumb">08:47 · music</div>
+            <div class="video-meta">
+              <div class="avatar">LO</div>
+              <div>
+                <div class="video-title">Lo-fi for late night deep work</div>
+                <div class="video-sub">Lo-fi Orbit · 1.1M views · 6 hours ago</div>
+              </div>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="thumb">05:19 · news</div>
+            <div class="video-meta">
+              <div class="avatar">BN</div>
+              <div>
+                <div class="video-title">Bengaluru monsoon: what changed this year</div>
+                <div class="video-sub">Bangalore Now · 88K views · 1 day ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 3: Privacy Center -->
+      <div class="screen" id="privacy">
+        <div class="statusbar">
+          <span class="sb-time">4:54 PM</span>
+          <div class="sb-icons">
+            <span class="sb-signal">📶</span>
+            <span class="sb-battery">🔋</span>
+          </div>
+        </div>
+        <div class="pc-head">
+          <div class="back" onclick="go('home')">←</div>
+          <h3>Privacy Center</h3>
+        </div>
+        <div class="scroll">
+          <div class="pc-section">
+            <h5>Your consent, by purpose</h5>
+            <div class="row"><div class="row-left"><span class="ico">▶</span><span>Watch &amp; search history</span></div><div class="row-right">On ›</div></div>
+            <div class="row"><div class="row-left"><span class="ico">🎯</span><span>Ad personalisation</span></div><div class="row-right">Off ›</div></div>
+            <div class="row"><div class="row-left"><span class="ico">📍</span><span>Location</span></div><div class="row-right">Off ›</div></div>
+            <div class="row"><div class="row-left"><span class="ico">🎙</span><span>Voice &amp; comments</span></div><div class="row-right">On ›</div></div>
+          </div>
+          <div class="pc-section">
+            <h5>Your data rights</h5>
+            <div class="row" id="row-view" onclick="requestRight('View my data', 'You will get an in-app summary of every data category YouTube holds about you, grouped by purpose.')">
+              <div class="row-left"><span class="ico">👁</span><span>See what YouTube knows about me</span></div><span class="chev">›</span>
+            </div>
+            <div class="row" id="row-correct" onclick="requestRight('Correct my data', 'You can edit or remove specific inferred interests directly — no support ticket needed.')">
+              <div class="row-left"><span class="ico">✎</span><span>Correct my inferred interests</span></div><span class="chev">›</span>
+            </div>
+            <div class="row" id="row-download" onclick="requestRight('Download my data', 'We package your watch history, search history and comments into a downloadable file.')">
+              <div class="row-left"><span class="ico">⬇</span><span>Download my data</span></div><span class="chev">›</span>
+            </div>
+            <div class="row" id="row-erase" onclick="requestRight('Erase my history', 'This clears your watch and search history used for recommendations. Your account stays active.')">
+              <div class="row-left"><span class="ico">🗑</span><span>Erase my watch &amp; search history</span></div><span class="chev">›</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 4: Rights request confirmation -->
+      <div class="screen" id="rights">
+        <div class="statusbar">
+          <span class="sb-time">4:54 PM</span>
+          <div class="sb-icons">
+            <span class="sb-signal">📶</span>
+            <span class="sb-battery">🔋</span>
+          </div>
+        </div>
+        <div class="scroll">
+          <div class="rights-hero">
+            <div class="rights-icon">✓</div>
+            <h3 id="rightsTitle">Request received</h3>
+            <p id="rightsBody">We're on it.</p>
+          </div>
+          <div class="receipt">
+            <div class="receipt-row"><span>Request type</span><span id="rReqType">—</span></div>
+            <div class="receipt-row"><span>Submitted</span><span>Just now</span></div>
+            <div class="receipt-row"><span>Expected by</span><span id="rSla">Within 7 days</span></div>
+            <div class="receipt-row"><span>Reference</span><span>DPDP-YT-84213</span></div>
+          </div>
+          <div style="padding:0 22px;">
+            <button class="btn-primary" id="btn-back-privacy" onclick="go('privacy')">Back to Privacy Center</button>
+            <button class="btn-ghost" id="btn-done" onclick="go('home')">Done</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /phone-frame -->
+  </div><!-- /phone-wrapper -->
+
+  <!-- RIGHT ANNOTATIONS -->
+  <aside class="annotations right-annotations">
+    <div class="anno-card anno-s2" data-screen="home">
+      <div class="anno-step">Step 2</div>
+      <h3 class="anno-title">Home Feed + Confirmation</h3>
+      <p class="anno-desc">After confirming choices, the user lands on their personalised Home feed. A green toast banner confirms their privacy choices have been saved, reinforcing transparency and control.</p>
+      <ul class="anno-details">
+        <li>Green success toast notification</li>
+        <li>Personalised video recommendations</li>
+        <li>Profile avatar → Privacy Center</li>
+        <li>Seamless, uninterrupted experience</li>
+      </ul>
+    </div>
+    <div class="anno-card anno-s4" data-screen="rights">
+      <div class="anno-step">Step 4</div>
+      <h3 class="anno-title">Data Rights Confirmation</h3>
+      <p class="anno-desc">When the user exercises a data right (view, correct, download, or erase), they immediately receive a confirmation receipt with a reference number and estimated timeline — no ambiguity.</p>
+      <ul class="anno-details">
+        <li>Instant acknowledgement</li>
+        <li>Unique reference number</li>
+        <li>Clear SLA timeline (within 7 days)</li>
+        <li>Easy return to Privacy Center</li>
+      </ul>
+    </div>
+  </aside>
+
+</main>
+
+<!-- ====== FOOTER ====== -->
+<footer class="proto-footer">
+  <p>Clickable prototype — <strong>happy path only</strong>. Navigate using the phone screen or the step buttons above.</p>
+</footer>
+
+<script src="Main.js"></script>
 </body>
 </html>
