@@ -118,13 +118,3 @@ Contributions are welcome! Feel free to open issues or submit pull requests for:
 - Mobile-responsive enhancements
 
 ---
-
-## 📄 License
-
-This project is open source. See [LICENSE](LICENSE) for details.
-
----
-
-<p align="center">
-  Built with ❤️ to demonstrate user-centric privacy design for the Indian digital ecosystem.
-</p>
