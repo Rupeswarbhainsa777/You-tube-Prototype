@@ -81,7 +81,6 @@ Any modern web browser (Chrome, Firefox, Edge, Safari).
 ├── index.html      # Main HTML — all 4 screens and annotation cards
 ├── Styling.css     # Complete stylesheet (design tokens, phone mockup, all screens)
 ├── Main.js         # Navigation logic, toast, data-rights handler
-├── .gitignore      # Git ignore rules
 └── README.md       # This file
 ```
 
@@ -118,3 +117,13 @@ Contributions are welcome! Feel free to open issues or submit pull requests for:
 - Mobile-responsive enhancements
 
 ---
+
+## 📄 License
+
+This project is released under the [MIT License](LICENSE).
+
+---
+
+<p align="center">
+  Made with ❤️ for privacy-first design in India
+</p>
